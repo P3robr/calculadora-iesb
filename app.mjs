@@ -57,6 +57,7 @@ function render() {
   result.dataset.state = state;
   result.dataset.mention = mention;
   get('status').textContent = status;
+  get('status').hidden = state === 'approved';
   get('average').textContent = average;
   get('mention').textContent = mention;
   document.querySelectorAll('.mentions [data-mention]').forEach(item => {
@@ -73,7 +74,7 @@ function render() {
     return;
   }
   announceTimer = setTimeout(() => {
-    get('announcement').textContent = `${status}. ${average === '—' ? '' : `Média ${average}. Menção ${mention}. `}${value}. ${description}`;
+    get('announcement').textContent = `${status}. ${average === '—' ? '' : `Média ${average}. Menção ${mention}. `}${value === status ? '' : `${value}. `}${description}`;
   }, 450);
 }
 
