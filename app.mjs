@@ -16,6 +16,12 @@ function render() {
   });
   get('clear').disabled = inputs.every(input => input.value === '');
   const [p1, p2] = grades.map(grade => grade.value);
+  const hasGrade = grades.some(grade => grade.value !== null);
+  result.hidden = !hasGrade;
+  document.querySelector('.empty-state').hidden = hasGrade;
+  const explanation = document.querySelector('.explanation');
+  explanation.hidden = !hasGrade;
+  if (!hasGrade) explanation.open = false;
   let state = 'empty', status = 'Aguardando notas', average = '—', mention = '—';
   let label = 'COMO USAR', value = 'Informe suas notas';
   let description = 'Preencha a P1 para descobrir quanto precisa na P2.';
@@ -62,6 +68,10 @@ function render() {
   get('next-value').textContent = value;
   get('next-description').textContent = description;
   clearTimeout(announceTimer);
+  if (!hasGrade) {
+    get('announcement').textContent = '';
+    return;
+  }
   announceTimer = setTimeout(() => {
     get('announcement').textContent = `${status}. ${average === '—' ? '' : `Média ${average}. Menção ${mention}. `}${value}. ${description}`;
   }, 450);
@@ -88,6 +98,7 @@ inputs.forEach(input => {
   });
 });
 get('grades').addEventListener('submit', event => event.preventDefault());
+get('start').addEventListener('click', () => inputs[0].focus());
 inputs[0].addEventListener('keydown', event => {
   if (event.key === 'Enter') { event.preventDefault(); inputs[1].focus(); }
 });

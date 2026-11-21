@@ -7,8 +7,8 @@
   <meta name="description" content="Calcule sua média do IESB e descubra quanto precisa na P2 ou P3. Simples, rápido e direto, no celular e no computador.">
   <title>Calculadora de média IESB</title>
   <link rel="icon" href="./assets/iesb-favicon.png" type="image/png">
-  <link rel="stylesheet" href="./styles.css?v=4">
-  <script type="module" src="./app.mjs?v=4"></script>
+  <link rel="stylesheet" href="./styles.css?v=5">
+  <script type="module" src="./app.mjs?v=5"></script>
 </head>
 <body>
   <header class="topbar wrap">
@@ -42,7 +42,13 @@
         <div class="automatic"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m11 2-6 9h5l-1 7 6-10h-5z"/></svg>O resultado atualiza enquanto você digita.</div>
       </section>
 
-      <section class="result" aria-labelledby="result-title" data-state="empty">
+      <section class="empty-state" aria-labelledby="empty-title">
+        <h2 id="empty-title">Preencha suas notas</h2>
+        <p>Informe P1 e P2 para ver sua média e situação.</p>
+        <button id="start" type="button">Preencher notas</button>
+      </section>
+
+      <section class="result" aria-labelledby="result-title" data-state="empty" hidden>
         <div class="result-top"><h2 id="result-title">Seu resultado</h2><span class="status" id="status">Aguardando notas</span></div>
         <div class="average"><span class="average-label">Média do semestre</span><div class="average-line"><output id="average" for="p1 p2" aria-live="off">—</output><span>de 10</span></div></div>
         <div class="scale" aria-hidden="true"><div class="scale-track"><div class="scale-fill" id="scale-fill"></div><span class="scale-marker"></span></div><div class="scale-labels"><span>0</span><span>Meta 5,00</span><span>10</span></div></div>
@@ -52,7 +58,7 @@
       </section>
     </div>
 
-    <details class="explanation">
+    <details class="explanation" hidden>
       <summary><span>Como funciona a conta?</span><span class="expand-icon" aria-hidden="true"></span></summary>
       <div class="explanation-content">
         <div><h3>A média</h3><p>A P1 vale 40% e a P2 vale 60% da nota.</p><code>Média = (P1 × 0,4) + (P2 × 0,6)</code></div>
