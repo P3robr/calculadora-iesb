@@ -67,8 +67,8 @@ input::placeholder{color:#b5b5bd;font-weight:400;opacity:1}
 .next-value{margin-top:7px;font-size:22px;font-weight:600;letter-spacing:-.035em;color:#414148;line-height:1.15}
 .next-step p{font-size:14px;color:#64646c;line-height:1.6;margin:8px 0 0;max-width:340px}
 .result[data-state="approved"]{--state-color:var(--green)}
-.result[data-state="approved"] .status{color:#286744;background:#edf4ee;border-color:#dbe8dd}
-.result[data-state="approved"] .next-value{color:var(--green)}
+.result[data-state="approved"] .status{font-weight:700;color:#286744;background:#edf4ee;border-color:#dbe8dd}
+.result[data-state="approved"] .next-value{font-size:32px;font-weight:700;color:var(--green)}
 .result[data-state="recovery"] .status{color:var(--amber);background:#faf1df;border-color:#eee0c6}
 .result[data-state="recovery"] .next-value,.result[data-state="partial"] .next-value{color:var(--red)}
 .result[data-state="invalid"] .status{color:#a32632;background:#fbecee;border-color:#edcdd1}

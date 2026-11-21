@@ -29,8 +29,8 @@ function render() {
     average = formatGrade(calculation.media); mention = calculation.mencao;
     progress = calculation.media / 10;
     if (calculation.approved) {
-      state = 'approved'; status = 'Aprovado'; label = 'RESULTADO';
-      value = 'Média de aprovação atingida'; description = 'Você atingiu a média de aprovação desta calculadora.';
+      state = 'approved'; status = 'Aprovado(a)'; label = 'SITUAÇÃO';
+      value = 'Aprovado(a)'; description = 'Você atingiu a média de aprovação.';
     } else {
       state = 'recovery'; status = 'Abaixo da média'; label = 'NOTA NECESSÁRIA NA P3';
       value = `${formatGrade(calculation.calcP3)} na P3`;
