@@ -8,6 +8,8 @@ As fórmulas e a ordem das operações seguem a [calculadora de Gabriel Sancho](
 
 Cada menção tem uma cor própria, compartilhada entre a legenda, o selo do resultado e a barra da média. A menção atual também fica contornada na legenda. A logo e o favicon foram obtidos do [site do IESB](https://www.iesb.br/); a calculadora é um projeto independente.
 
+Os campos aceitam apenas dígitos e um separador decimal (vírgula ou ponto). Letras, espaços, sinais e separadores repetidos são bloqueados na digitação e na colagem. A validação de notas entre 0 e 10 continua ativa.
+
 ## Desenvolvimento
 
 Requer Node.js 20 ou superior apenas para os comandos locais:

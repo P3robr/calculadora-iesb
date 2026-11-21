@@ -1,12 +1,14 @@
-import { calculate, parseGrade, formatGrade } from './calculator.mjs';
+import { calculate, parseGrade, formatGrade, isGradeInput } from './calculator.mjs?v=2';
 
 const get = id => document.getElementById(id);
 const inputs = [get('p1'), get('p2')];
+const previousValues = new WeakMap(inputs.map(input => [input, '']));
 const result = document.querySelector('.result');
 let announceTimer;
 
 function render() {
   const grades = inputs.map(input => {
+    if (isGradeInput(input.value)) previousValues.set(input, input.value);
     const parsed = parseGrade(input.value);
     input.setAttribute('aria-invalid', String(Boolean(parsed.error)));
     get(`${input.id}-error`).textContent = parsed.error;
@@ -65,7 +67,26 @@ function render() {
   }, 450);
 }
 
-inputs.forEach(input => input.addEventListener('input', render));
+const editedValue = (input, text) => input.value.slice(0, input.selectionStart) + text + input.value.slice(input.selectionEnd);
+inputs.forEach(input => {
+  input.addEventListener('beforeinput', event => {
+    if (!event.isComposing && event.inputType.startsWith('insert') && event.data !== null
+        && !isGradeInput(editedValue(input, event.data))) event.preventDefault();
+  });
+  input.addEventListener('paste', event => {
+    const text = event.clipboardData?.getData('text');
+    if (text !== undefined && !isGradeInput(editedValue(input, text))) event.preventDefault();
+  });
+  input.addEventListener('input', () => {
+    if (!isGradeInput(input.value)) {
+      const position = input.selectionStart;
+      input.value = previousValues.get(input) ?? '';
+      const cursor = Math.min(position, input.value.length);
+      input.setSelectionRange(cursor, cursor);
+    }
+    render();
+  });
+});
 get('grades').addEventListener('submit', event => event.preventDefault());
 inputs[0].addEventListener('keydown', event => {
   if (event.key === 'Enter') { event.preventDefault(); inputs[1].focus(); }

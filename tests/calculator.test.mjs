@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { calculate, parseGrade, formatGrade } from '../calculator.mjs';
+import { calculate, parseGrade, formatGrade, isGradeInput } from '../calculator.mjs';
 
 test('exemplo de recuperação: a P2 é substituída mesmo sendo a maior nota', () => {
   const result = calculate(4, 4.5);
@@ -36,4 +36,11 @@ test('entrada aceita vírgula e ponto e rejeita notas inválidas', () => {
   assert.equal(parseGrade('10').value, 10);
   assert.equal(parseGrade('.5').value, 0.5);
   for (const raw of ['-1', '11', 'NaN', 'Infinity', '4,5.2', '1e1', '<script>', '9 9']) assert.ok(parseGrade(raw).error);
+});
+
+test('digitação aceita apenas dígitos e um separador, sem bloquear edição parcial', () => {
+  for (const raw of ['', '0', '10', '4,', '4.', ',5', '.5', '4,75', '4.75']) assert.equal(isGradeInput(raw), true, raw);
+  for (const raw of ['a', '4a', '1e1', '-1', '+1', '4,5.2', '4,,5', '4..5', '4 5', '7\n', '<script>']) {
+    assert.equal(isGradeInput(raw), false, raw);
+  }
 });

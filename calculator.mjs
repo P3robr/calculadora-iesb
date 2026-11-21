@@ -33,3 +33,6 @@ export function parseGrade(raw) {
 }
 
 export const formatGrade = value => value.toFixed(2).replace('.', ',');
+
+// Permite estados intermediários de digitação, inclusive campo vazio ou separador.
+export const isGradeInput = raw => /^\d*(?:[.,]\d*)?$/.test(raw);
