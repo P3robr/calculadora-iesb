@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fafafa">
+  <meta name="description" content="Calcule sua média do IESB e descubra quanto precisa na P2 ou P3. Simples, rápido e direto, no celular e no computador.">
+  <title>Calculadora IESB · Sua média, sem mistério</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="brand" href="./" aria-label="Calculadora IESB, início">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 10h5m-2.5-2.5v5M20 8l4 4m0-4-4 4M9 21h5m6-2h5m-5 4h5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>IESB<span class="brand-divider">/</span><span class="brand-name">calculadora</span></span>
+    </a>
+    <span class="top-note">Menos conta. Mais clareza.</span>
+  </header>
+
+  <main class="wrap">
+    <div class="intro">
+      <p class="eyebrow">SEU SEMESTRE, EM NÚMEROS</p>
+      <h1>Sua média, <em>sem mistério.</em></h1>
+      <p>Coloque suas notas. Veja onde está e quanto falta.</p>
+    </div>
+
+    <div class="calculator">
+      <section class="entry" aria-labelledby="grades-title">
+        <div class="section-heading"><h2 id="grades-title">Suas notas</h2><button id="clear" class="clear" type="button" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 6v4h4M4.4 9a6 6 0 1 1 1.3 5"/></svg>Limpar</button></div>
+        <p class="section-description">De 0 a 10. O resto é com a gente.</p>
+        <form id="grades" novalidate autocomplete="off">
+          <div class="grade-field">
+            <div class="label-row"><label for="p1">Prova 1 <span>P1</span></label><span class="weight">Peso 40%</span></div>
+            <div class="input-shell"><input id="p1" name="p1" type="text" inputmode="decimal" placeholder="0,00" spellcheck="false" aria-describedby="p1-error" enterkeyhint="next"><span class="out-of">/ 10</span></div>
+            <p class="field-error" id="p1-error"></p>
+          </div>
+          <div class="grade-field">
+            <div class="label-row"><label for="p2">Prova 2 <span>P2</span></label><span class="weight">Peso 60%</span></div>
+            <div class="input-shell"><input id="p2" name="p2" type="text" inputmode="decimal" placeholder="0,00" spellcheck="false" aria-describedby="p2-error" enterkeyhint="done"><span class="out-of">/ 10</span></div>
+            <p class="field-error" id="p2-error"></p>
+          </div>
+        </form>
+        <div class="automatic"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m11 2-6 9h5l-1 7 6-10h-5z"/></svg>O resultado atualiza enquanto você digita.</div>
+      </section>
+
+      <section class="result" aria-labelledby="result-title" data-state="empty">
+        <div class="result-top"><h2 id="result-title">Seu resultado</h2><span class="status" id="status">Aguardando notas</span></div>
+        <div class="average"><span class="average-label">Média do semestre</span><div class="average-line"><output id="average" for="p1 p2" aria-live="off">—</output><span>de 10</span></div></div>
+        <div class="scale" aria-hidden="true"><div class="scale-track"><div class="scale-fill" id="scale-fill"></div><span class="scale-marker"></span></div><div class="scale-labels"><span>0</span><span>Meta 5,00</span><span>10</span></div></div>
+        <div class="mention-row"><span>Sua menção</span><span id="mention">—</span></div>
+        <div class="next-step" id="next-step"><div class="next-label" id="next-label">TUDO COMEÇA AQUI</div><div class="next-value" id="next-value">Vamos calcular?</div><p id="next-description">Preencha a P1 para descobrir quanto precisa na P2.</p></div>
+        <p class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+    </div>
+
+    <details class="explanation">
+      <summary><span>Como funciona a conta?</span><span class="expand-icon" aria-hidden="true"></span></summary>
+      <div class="explanation-content">
+        <div><h3>A média</h3><p>A P1 vale 40% e a P2 vale 60% da nota.</p><code>Média = (P1 × 0,4) + (P2 × 0,6)</code></div>
+        <div><h3>A aprovação e a P3</h3><p>Como na calculadora original, a aprovação começa em <strong>4,96</strong>. As projeções de P2 e P3 miram <strong>5,00</strong>. A P3 substitui uma prova, mantendo o peso dela. A indicação segue a mesma lógica do original.</p></div>
+        <div class="mentions"><h3>As menções</h3><p>Calculadas sobre a média arredondada em duas casas, como no original.</p><dl><div><dt>SS</dt><dd>9 a 10</dd></div><div><dt>MS</dt><dd>7 a 8,99</dd></div><div><dt>MM</dt><dd>5 a 6,99</dd></div><div><dt>MI</dt><dd>3 a 4,99</dd></div><div><dt>II</dt><dd>0,10 a 2,99</dd></div><div><dt>SR</dt><dd>0 a 0,09</dd></div></dl><p>Por isso, uma média entre 4,96 e 4,99 pode indicar aprovação com menção MI. As projeções usam o arredondamento original; confira a nota exata com seu professor.</p></div>
+      </div>
+    </details>
+    <footer><span>Feita para simplificar seu semestre.</span><a href="https://github.com/Sancho41/calculadora_iesb" target="_blank" rel="noopener noreferrer">Baseada na calculadora de Gabriel Sancho<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 3h4v4M7 9l6-6"/></svg></a></footer>
+    <noscript><p class="no-script">Ative o JavaScript no navegador para calcular suas notas.</p></noscript>
+  </main>
+</body>
+</html>
