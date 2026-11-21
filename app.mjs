@@ -15,19 +15,19 @@ function render() {
   get('clear').disabled = inputs.every(input => input.value === '');
   const [p1, p2] = grades.map(grade => grade.value);
   let state = 'empty', status = 'Aguardando notas', average = '—', mention = '—';
-  let label = 'TUDO COMEÇA AQUI', value = 'Vamos calcular?';
+  let label = 'COMO USAR', value = 'Informe suas notas';
   let description = 'Preencha a P1 para descobrir quanto precisa na P2.';
   let progress = 0;
 
   if (grades.some(grade => grade.error)) {
-    state = 'invalid'; status = 'Confira as notas'; label = 'UM PEQUENO AJUSTE';
+    state = 'invalid'; status = 'Confira as notas'; label = 'NOTA INVÁLIDA';
     value = 'Confira o campo marcado'; description = 'Use notas de 0 a 10. Você pode digitar com vírgula ou ponto.';
   } else if (p1 !== null && p2 !== null) {
     const calculation = calculate(p1, p2);
     average = formatGrade(calculation.media); mention = calculation.mencao;
     progress = calculation.media / 10;
     if (calculation.approved) {
-      state = 'approved'; status = 'Aprovado'; label = 'PODE RESPIRAR';
+      state = 'approved'; status = 'Aprovado'; label = 'RESULTADO';
       value = 'Média de aprovação atingida'; description = 'Você atingiu a média de aprovação desta calculadora.';
     } else {
       state = 'recovery'; status = 'Abaixo da média'; label = 'NOTA NECESSÁRIA NA P3';
@@ -42,14 +42,19 @@ function render() {
     description = 'Já fez a segunda prova? Preencha a P2 para ver sua média.';
     if (needed > 10) description = 'A nota projetada ultrapassa o máximo de 10. Preencha a P2 para conferir sua média e a projeção de P3.';
   } else if (p2 !== null) {
-    state = 'partial'; status = 'Falta a P1'; label = 'SÓ FALTA UMA NOTA';
+    state = 'partial'; status = 'Falta a P1'; label = 'NOTA PENDENTE';
     value = 'Qual foi sua P1?'; description = 'Preencha a primeira prova para calcular sua média do semestre.';
   }
 
   result.dataset.state = state;
+  result.dataset.mention = mention;
   get('status').textContent = status;
   get('average').textContent = average;
   get('mention').textContent = mention;
+  document.querySelectorAll('.mentions [data-mention]').forEach(item => {
+    if (item.dataset.mention === mention) item.setAttribute('aria-current', 'true');
+    else item.removeAttribute('aria-current');
+  });
   get('scale-fill').style.transform = `scaleX(${progress})`;
   get('next-label').textContent = label;
   get('next-value').textContent = value;

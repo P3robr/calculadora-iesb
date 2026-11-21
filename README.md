@@ -6,6 +6,8 @@ Calculadora de médias para celular e computador. Digite as notas de P1 e P2 par
 
 As fórmulas e a ordem das operações seguem a [calculadora de Gabriel Sancho](https://github.com/Sancho41/calculadora_iesb/blob/master/calculadora.vue): P1 com peso de 40%, P2 com peso de 60%, aprovação em 4,96, projeções mirando 5,00, escolha da substituição e arredondamento em duas casas. As menções usam a média arredondada; a aprovação usa a média original. Portanto, aprovação e menção MI podem aparecer juntas.
 
+Cada menção tem uma cor própria, compartilhada entre a legenda, o selo do resultado e a barra da média. A menção atual também fica contornada na legenda. A logo e o favicon foram obtidos do [site do IESB](https://www.iesb.br/); a calculadora é um projeto independente.
+
 ## Desenvolvimento
 
 Requer Node.js 20 ou superior apenas para os comandos locais:
